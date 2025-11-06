@@ -1,0 +1,54 @@
+# Object files
+*.o
+
+# Executables (files without extensions in Linux)
+*
+!*.*
+!*/
+
+# Specific executables we know about
+/process_time
+/calendar_time
+/idshow
+/copy
+/p48
+/p114
+/p115
+/p115a
+/mem_segments
+/seek_io
+/test_error_functions
+/test_tlpi_hdr
+
+# Temp files
+*.tmp
+
+# Debug files
+core
+core.*
+vgcore.*
+
+# Build directories
+/build/
+/bin/
+/obj/
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.swp
+*~
+
+# Libraries
+*.a
+*.so
+*.dylib
+
+# Dependency directories
+/lib/
+/vendor/
+
+# OS specific files
+.DS_Store
+.directory
+.Trash-*
