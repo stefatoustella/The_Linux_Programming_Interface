@@ -1,6 +1,6 @@
 # The Linux Programming Interface
 
-This repository contains code examples and exercises from "The Linux Programming Interface" by Michael Kerrisk, a comprehensive guide to Linux and UNIX system programming.
+This repository contains code examples and exercises from "The Linux Programming Interface" by Michael Kerrisk, a comprehensive guide to Linux and UNIX system programming. This is a working repository implementing various Linux system programming concepts.
 
 ## About the Book
 
@@ -25,42 +25,59 @@ The book provides detailed coverage of:
 
 This repository contains implementations and exercises from the book, including:
 
-### System Programming Concepts
+### Implemented System Programming Concepts
 
-- Process Creation and Program Execution
-- Process Credentials
-- File I/O Operations
-- Files and Directories
-- Process Groups, Sessions, and Job Control
-- Signals and Timers
-- Memory Allocation
-- Time Measurement
+1. **Process Management**
 
-### Key Programs
+   - Process Creation and Execution (`p114.c`, `p115.c`)
+   - Process Relationships (`p115.c`, `p115a.c`)
+   - Process Times (`process_time.c`)
 
-1. **Error Handling**
+2. **Memory Management**
 
-   - `error_functions.c`: Implementation of error handling functions
-   - `ename.c.inc`: Error name handling
-
-2. **Process Management**
-
-   - `process_time.c`: Demonstration of process CPU time measurement
-   - `p115.c`: Process relationships example
-   - `p115a.c`: Orphaned process demonstration
+   - Memory Segments (`mem_segments.c`)
+   - Dynamic Memory Allocation (`free_and_sbrk.c`)
+   - Program Break Manipulation (`free_and_sbrk.c`)
 
 3. **Time and Date**
 
-   - `calendar_time.c`: Calendar time functions
-   - `process_time.c`: Process time measurement
+   - Calendar Time (`calendar_time.c`)
+   - Time Functions (`p187.c`, `p187a.c`)
+   - Process CPU Time (`process_time.c`)
 
 4. **File Operations**
 
-   - `copy.c`: File copying implementation
-   - `seek_io.c`: File seeking and I/O operations
+   - Basic I/O (`p48.c`)
+   - File Copying (`copy.c`)
+   - File Seeking (`seek_io.c`)
 
-5. **Memory Management**
-   - `mem_segments.c`: Memory segments demonstration
+5. **User and Group Information**
+   - Process Credentials (`idshow.c`)
+   - User/Group Functions (`ugid_functions.c`)
+
+### Core Components and Libraries
+
+1. **Header Files**
+
+   - `tlpi_hdr.h`: Common definitions and includes
+   - `error_functions.h`: Error handling prototypes
+   - `get_num.h`: Number parsing declarations
+   - `ugid_functions.h`: User/Group function declarations
+
+2. **Library Source Files**
+
+   - `error_functions.c`: Error handling framework
+   - `get_num.c`: Command-line number parsing
+   - `ugid_functions.c`: User/Group ID utilities
+   - `ename.c.inc`: Error name mappings
+
+3. **Static Libraries**
+
+   - `liberr.a`: Error handling functions
+   - `libugid.a`: User/Group ID utilities
+
+4. **Build System**
+   - `Makefile`: Build rules and targets
 
 ## Building and Running
 
@@ -79,7 +96,6 @@ gcc -Wall -I. -o program_name program_name.c liberr.a
 ## Dependencies
 
 - GCC (GNU Compiler Collection)
-- Linux-based operating system
 - Make (for building multiple programs)
 
 ## Notes
