@@ -17,7 +17,6 @@ p48
 seek_io
 test_error_functions
 test_tlpi_hdr
-t_uname.e
 
 # Temp files
 *.tmp
@@ -42,6 +41,7 @@ vgcore.*
 *.a
 *.so
 *.dylib
+*.e
 
 # Dependency directories
 /lib/
