@@ -17,8 +17,9 @@ p48
 seek_io
 test_error_functions
 test_tlpi_hdr
-t_uname.e
 t_uname
+t_uname.e
+t_uname.o
 
 # Temp files
 *.tmp
