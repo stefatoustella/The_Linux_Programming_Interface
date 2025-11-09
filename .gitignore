@@ -42,7 +42,6 @@ vgcore.*
 *.a
 *.so
 *.dylib
-*.e
 
 # Dependency directories
 /lib/
