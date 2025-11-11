@@ -20,6 +20,7 @@ test_tlpi_hdr
 t_uname
 t_uname.e
 free_and_sbrk
+file_perms
 
 # Temp files
 *.tmp
