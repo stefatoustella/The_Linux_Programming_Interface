@@ -39,4 +39,4 @@ extern "C"
 }
 #endif
 
-#endif /* GET_NUM_H */ s
+#endif /* GET_NUM_H */

@@ -1,19 +1,16 @@
-/* tlpi_hdr.h
- * Small header for The Linux Programming Interface examples
- * Defines MIN and MAX macros for two numeric values.
- *
- * For GCC/Clang we use typeof and a statement-expression so each argument
- * is evaluated exactly once. For other compilers we fall back to the
- * classic expression macros (which may evaluate arguments multiple times).
- */
-
 #ifndef TLPI_HDR_H
 #define TLPI_HDR_H /* Prevent accidental double inclusion*/
+
+/* Expose POSIX prototypes (mkstemp, etc.). Must be defined before system
+ * headers are included. Use 200809L for modern POSIX features.
+ */
+#ifndef _POSIX_C_SOURCE
+#define _POSIX_C_SOURCE 200809L
+#endif
 
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>

@@ -22,6 +22,7 @@ t_uname.e
 free_and_sbrk
 file_perms
 t_fork
+fork_file_sharing
 
 # Temp files
 *.tmp
