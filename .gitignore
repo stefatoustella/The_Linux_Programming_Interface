@@ -24,6 +24,7 @@ file_perms
 t_fork
 fork_file_sharing
 t_vfork
+make_zombie
 
 # Temp files
 *.tmp
