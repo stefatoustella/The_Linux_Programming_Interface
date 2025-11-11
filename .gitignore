@@ -25,6 +25,8 @@ t_fork
 fork_file_sharing
 t_vfork
 make_zombie
+print_wait_status
+t_system
 
 # Temp files
 *.tmp
