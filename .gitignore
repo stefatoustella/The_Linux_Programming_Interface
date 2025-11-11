@@ -23,6 +23,7 @@ free_and_sbrk
 file_perms
 t_fork
 fork_file_sharing
+t_vfork
 
 # Temp files
 *.tmp

@@ -4,9 +4,8 @@
 /*
  * error_functions.h
  * Small helper prototypes for error-reporting functions used in TLPI
- * examples. This header is C and C++ friendly and provides a portable
- * NORETURN macro that prefers C11's _Noreturn when available and falls
- * back to the GCC/Clang noreturn attribute.
+ * examples. C / C++ friendly. Provides NORETURN macros and optional
+ * printf-format checking when compiled with GCC/Clang.
  */
 
 #ifdef __cplusplus
@@ -14,20 +13,11 @@ extern "C"
 {
 #endif
 
-    /* Prototype for a nonfatal error message (does not exit) */
-    void errMsg(const char *format, ...);
-
-/* NORETURN handling: different compilers support different forms. Use a
- * prefix macro (NORETURN_PREFIX) for C11's _Noreturn, and a suffix macro
- * (NORETURN_SUFFIX) for GCC/Clang __attribute__((noreturn)). This lets
- * us write declarations that work with either mechanism.
- */
+/* NORETURN handling */
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
-/* C11: _Noreturn is a prefix specifier */
 #define NORETURN_PREFIX _Noreturn
 #define NORETURN_SUFFIX
 #elif defined(__GNUC__) || defined(__clang__)
-/* GCC/Clang: use attribute as a suffix */
 #define NORETURN_PREFIX
 #define NORETURN_SUFFIX __attribute__((__noreturn__))
 #else
@@ -35,13 +25,24 @@ extern "C"
 #define NORETURN_SUFFIX
 #endif
 
+/* printf-style format attribute for GCC/Clang */
+#if defined(__GNUC__) || defined(__clang__)
+#define PRINTF_FMT(a, b) __attribute__((format(printf, a, b)))
+#else
+#define PRINTF_FMT(a, b)
+#endif
+
+    /* Prototype for a nonfatal error message (does not exit) */
+    void errMsg(const char *format, ...) PRINTF_FMT(1, 2);
+
     /* Prototypes for functions that terminate the program */
-    NORETURN_PREFIX void errExit(const char *format, ...) NORETURN_SUFFIX;
-    NORETURN_PREFIX void err_exit(const char *format, ...) NORETURN_SUFFIX; /* legacy alias */
-    NORETURN_PREFIX void errExitEN(int errnum, const char *format, ...) NORETURN_SUFFIX;
-    NORETURN_PREFIX void fatal(const char *format, ...) NORETURN_SUFFIX;
-    NORETURN_PREFIX void usageErr(const char *format, ...) NORETURN_SUFFIX;
-    NORETURN_PREFIX void cmdLineErr(const char *format, ...) NORETURN_SUFFIX;
+    NORETURN_PREFIX void errExit(const char *format, ...) NORETURN_SUFFIX PRINTF_FMT(1, 2);
+    NORETURN_PREFIX void err_exit(const char *format, ...) NORETURN_SUFFIX PRINTF_FMT(1, 2); /* legacy alias */
+    /* errExitEN takes an explicit errno first, so format is argument 2 */
+    NORETURN_PREFIX void errExitEN(int errnum, const char *format, ...) NORETURN_SUFFIX PRINTF_FMT(2, 3);
+    NORETURN_PREFIX void fatal(const char *format, ...) NORETURN_SUFFIX PRINTF_FMT(1, 2);
+    NORETURN_PREFIX void usageErr(const char *format, ...) NORETURN_SUFFIX PRINTF_FMT(1, 2);
+    NORETURN_PREFIX void cmdLineErr(const char *format, ...) NORETURN_SUFFIX PRINTF_FMT(1, 2);
 
 #ifdef __cplusplus
 }
