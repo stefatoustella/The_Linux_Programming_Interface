@@ -21,6 +21,7 @@ t_uname
 t_uname.e
 free_and_sbrk
 file_perms
+t_fork
 
 # Temp files
 *.tmp
