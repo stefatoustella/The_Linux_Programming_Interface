@@ -1,8 +1,10 @@
 /*
  * error_functions.c
  * Implementations of the error-reporting helpers declared in
- * error_functions.h. This is a compact, safe implementation suitable
- * for TLPI-style examples.
+ * error_functions.h. This version is defensive:
+ * - It does NOT include tlpi_hdr.h (avoids circular includes).
+ * - It includes ename.c.inc only if present (using __has_include when available).
+ * - It works even if the optional ename table is not available.
  */
 
 #include <stdarg.h>
@@ -13,11 +15,22 @@
 #include <unistd.h>
 
 #include "error_functions.h"
-#include "tlpi_hdr.h"
+
 /* If ename.c.inc is present it provides an `ename[]` table and MAX_ENAME.
- * Include it so we can print symbolic errno names when available.
+ * Include it only when present so build succeeds whether or not you have
+ * TLPI's ename table file.
+ */
+#if defined(__has_include)
+#if __has_include("ename.c.inc")
+#include "ename.c.inc"
+#endif
+#else
+/* Older compilers: try unguarded include (will fail at compile time if not present)
+ * If you don't have ename.c.inc, the implementation below still works
+ * because we check for MAX_ENAME before using ename[].
  */
 #include "ename.c.inc"
+#endif
 
 /* terminate: if EF_DUMPCORE is set, abort to produce a core dump; otherwise
  * either call exit() (if useExit3 != 0) or _exit() to avoid flushing stdio
@@ -49,7 +62,6 @@ outputError(int useErr, int err, int flushStdout,
             const char *format, va_list ap)
 {
 #define BUF_SIZE 500
-    char buf[BUF_SIZE];
     char userMsg[BUF_SIZE];
     char errText[BUF_SIZE];
 
@@ -59,7 +71,7 @@ outputError(int useErr, int err, int flushStdout,
     {
         const char *ename_str = NULL;
 #ifdef MAX_ENAME
-        if (err > 0 && err <= MAX_ENAME)
+        if (err >= 0 && err <= MAX_ENAME)
             ename_str = ename[err];
 #endif
         if (ename_str != NULL)

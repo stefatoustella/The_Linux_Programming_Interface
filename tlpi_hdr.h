@@ -21,6 +21,12 @@
 #include "get_num.h"
 #include "error_functions.h"
 
+typedef enum
+{
+    TRUE = 1,
+    FALSE = 0
+} Boolean;
+
 /* Use compiler extensions when available to avoid double evaluation */
 #if defined(__GNUC__) || defined(__clang__)
 

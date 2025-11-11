@@ -19,7 +19,7 @@ extern "C"
 
 /* NORETURN handling: different compilers support different forms. Use a
  * prefix macro (NORETURN_PREFIX) for C11's _Noreturn, and a suffix macro
- * (NORETURN_SUFFIX) for GCC/Clang __attribute__((noreturn__)). This lets
+ * (NORETURN_SUFFIX) for GCC/Clang __attribute__((noreturn)). This lets
  * us write declarations that work with either mechanism.
  */
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
