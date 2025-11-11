@@ -19,6 +19,7 @@ test_error_functions
 test_tlpi_hdr
 t_uname
 t_uname.e
+free_and_sbrk
 
 # Temp files
 *.tmp
