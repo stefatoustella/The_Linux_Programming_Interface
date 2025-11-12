@@ -29,6 +29,8 @@ print_wait_status
 t_system
 system
 system_case_study
+become_daemon
+test_daemon
 
 # Temp files
 *.tmp
