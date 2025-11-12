@@ -27,6 +27,8 @@ t_vfork
 make_zombie
 print_wait_status
 t_system
+system
+system_case_study
 
 # Temp files
 *.tmp
